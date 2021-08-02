@@ -124,7 +124,7 @@ namespace Yet.Another.Shopping.Cart
             app.UseStatusCodePages();
  
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseVisitorCounter();
