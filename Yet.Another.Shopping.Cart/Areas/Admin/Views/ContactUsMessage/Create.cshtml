@@ -1,0 +1,49 @@
+﻿@model ContactUsMessageModel
+@{
+    ViewData["Title"] = ViewData["ContentHeader"] = "Write email";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var menuItem = $('#menu-support');
+        menuItem.addClass('active');
+        var subMenuItem = menuItem.find('#menu-support-writeus').parent();
+        subMenuItem.addClass('active');
+    });</script>
+
+@section headerLeftOptional {
+    <a asp-action="List" class="fa fa-arrow-circle-left"> back to list</a>
+}
+<!-- quick email widget -->
+<div class="box box-info">
+    <div class="box-header">
+        <i class="fa fa-envelope"></i>
+        <h3 class="box-title">Quick Email</h3>
+        <!-- tools box -->
+        <div class="pull-right box-tools">
+            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <!-- /. tools -->
+    </div>
+    <form asp-area="Admin" asp-controller="ContactUsMessage" asp-action="Send" id="email-form" method="post">
+        <div class="box-body">
+            <div class="form-group">
+                <input id="To" name="To" type="email" class="form-control" placeholder="Email to:">
+            </div>
+            <div class="form-group">
+                <input id="Title" name="Title" type="text" class="form-control" placeholder="Title">
+            </div>
+            <div>
+                <textarea id="Reply" name="Reply" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+        </div>
+        <div class="box-footer clearfix">
+            <button type="submit" class="pull-right btn btn-default" id="sendEmail">
+                Send
+                <i class="fa fa-arrow-circle-right"></i>
+            </button>
+        </div>
+    </form>
+</div>

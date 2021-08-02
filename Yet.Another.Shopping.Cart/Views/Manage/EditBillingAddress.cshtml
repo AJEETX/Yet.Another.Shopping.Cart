@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model BillingAddressModel
+@{ ViewData["Title"] = "Edit billing address"; }
+
+<div class="container">
+    <section class=" content-wrapper content-header">
+        <ol class=" breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i>Home </a><i class="fa fa-angle-double-right" aria-hidden="true"></i></li>
+            <li class="breadcrumb-item"><a href="#">Account </a><i class="fa fa-angle-double-right" aria-hidden="true"></i></li>
+            <li class="breadcrumb-item active"> Address</li>
+        </ol>
+    </section>
+    <form asp-controller="Manage" asp-action="EditBillingAddress" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <h4>Edit Profile</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+                <div class="form-horizontal">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="Telephone" class="control-label"></label>
+                            <input asp-for="Telephone" class="form-control" />
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label asp-for="City" class="control-label"></label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="StateProvince" class="control-label"></label>
+                            <input asp-for="StateProvince" class="form-control" />
+                            <span asp-validation-for="StateProvince" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label asp-for="ZipPostalCode" class="control-label"></label>
+                            <input asp-for="ZipPostalCode" class="form-control" />
+                            <span asp-validation-for="ZipPostalCode" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="Country" class="control-label"></label>
+                            <input asp-for="Country" class="form-control" />
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-4">
+                <div class="form-group">
+                    @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+                    {
+                        <img id="profilePicture" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))" alt="User Image"> }
+                    @*else
+                    {
+                        <img id="profilePicture" src="~/images/system/no-image.png" alt="User Image">
+                    }*@
+                    <input asp-for="@UserManager.GetUserAsync(User).Result.ProfilePicture" type="file" accept=".png,.jpg,.jpeg,.gif,.tif" class="form-control profile-photo" onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+                 <div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="Index" class="btn btn-secondary"> Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

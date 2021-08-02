@@ -1,0 +1,119 @@
+﻿@model BillingAddressModel
+@{
+    ViewData["Title"] = ViewData["ContentHeader"] = " User details";
+}
+@section menu {
+    <script type="text/javascript">
+        $(function () {
+            var menuItem = $('#menu-customer');
+            menuItem.addClass('active');
+            var subMenuItem = menuItem.find('#menu-customer-details').parent();
+            subMenuItem.addClass('active');
+        });
+    </script>
+}
+
+@section headerLeftOptional {
+    <a asp-action="Users" class="fa fa-arrow-circle-left"> back to list</a>
+}
+
+@section actionHeader {
+    <div class="input-group">
+        <button type="button" class="btn btn-primary input-stack-margin" id="save"><i class="fa fa-save"></i>&nbsp; Save</button>
+        <button type="button" class="btn btn-primary input-stack-margin" id="continue"><i class="fa fa-save"></i>&nbsp; Save and continue editing</button>
+    </div>
+}
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-controller="Manage" asp-action="EditBillingAddress" method="post" id="categoryForm">
+                <input type="hidden" id="continueEditing" name="continueEditing" value="false" />
+
+                <div id="validation"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+                        <div class="form-horizontal">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label asp-for="FirstName" class="control-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="LastName" class="control-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label asp-for="Address" class="control-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label asp-for="City" class="control-label"></label>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="StateProvince" class="control-label"></label>
+                                    <input asp-for="StateProvince" class="form-control" />
+                                    <span asp-validation-for="StateProvince" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label asp-for="ZipPostalCode" class="control-label"></label>
+                                    <input asp-for="ZipPostalCode" class="form-control" />
+                                    <span asp-validation-for="ZipPostalCode" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="Country" class="control-label"></label>
+                                    <input asp-for="Country" class="form-control" />
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label asp-for="Telephone" class="control-label"></label>
+                                    <input asp-for="Telephone" class="form-control" />
+                                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div> <!-- col md 12 end -->
+    </div> <!-- row end -->
+@section scripts{ 
+<script>
+    $('#save').on('click', function (e) {
+        e.preventDefault();
+
+        // check if form is valid
+        var result = $('#categoryForm').valid();
+
+        if (result != 0) {
+            $('#continueEditing').val(false);
+
+
+            $('#categoryForm').submit();
+        } else {
+            $('#validation').empty();
+            $('#validation').append('<div class="validation-summary-errors text-danger"><ul><li>Something went wrong! Recheck all inputs</li></ul></div>');
+        }
+    });
+</script>
+}
